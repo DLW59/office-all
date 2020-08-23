@@ -1,8 +1,5 @@
 package com.kun.sdk.office.test;
 
-import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.ExcelWriter;
-import com.alibaba.excel.write.metadata.WriteSheet;
 import com.dlw.architecture.office.enums.FileType;
 import com.dlw.architecture.office.excel.ExcelExporter;
 import com.dlw.architecture.office.excel.ExcelTemplateExporter;
@@ -12,27 +9,21 @@ import com.dlw.architecture.office.model.pdf.PdfTableModel;
 import com.dlw.architecture.office.pdf.PdfExporter;
 import com.dlw.architecture.office.pdf.PdfTemplateExporter;
 import com.dlw.architecture.office.template.WordTemplateImporter;
-import com.dlw.architecture.office.util.IoUtil;
 import com.dlw.architecture.office.word.util.WordExporter;
 import com.dlw.architecture.office.word.wrapper.WordDataWrapper;
 import com.kun.sdk.office.test.example.*;
-import com.kun.sdk.office.test.example.listener.AddressListener;
-import com.kun.sdk.office.test.example.listener.PersonListener;
 import com.kun.sdk.office.test.example.word.EasyWord;
-import com.kun.sdk.office.test.example.write.SpinnerWriteHandler;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicLong;
 
 import static com.dlw.architecture.office.excel.ExcelImporter.read;
 
@@ -131,68 +122,6 @@ public class OfficeApp {
         return lists.toString();
     }
 
-    @GetMapping("/easy/export")
-    public void easyexcelW(HttpServletResponse response) throws IOException, OfficeException {
-        List<Address> addresses = new ArrayList<>();
-        List<Person> people = new ArrayList<>();
-//        addresses.add(new Address("四川","成都","高新","5"));
-//        addresses.add(new Address("四川","自贡","大安","5"));
-//        ExcelExportUtil.export(Address.class,addresses,"easyexcel导出",response);
-        ResponseUtil.initExcelResponse(response, "easyexcel导出", FileType.ExcelType.XLSX);
-
-        //导出一个sheet
-//        EasyExcel.write(response.getOutputStream(),Address.class)
-//                .excelType(ExcelTypeEnum.XLS)
-//                .sheet("hh")
-//                //注册拦截器
-//                .registerWriteHandler(new SpinnerWriteHandler())
-//                .build();
-        Map<Integer, String[]> personDropDown = new HashMap<>();
-        final ExcelWriter writer = EasyExcel.write(response.getOutputStream())
-//                .useDefaultStyle(false)
-                .build();
-
-        final WriteSheet sheet1 = EasyExcel.writerSheet(0, "sheet1")
-                .head(Address.class)
-                .build();
-
-        personDropDown.put(2, new String[]{"22", "25", "30"});
-        final WriteSheet sheet2 = EasyExcel.writerSheet(1, "sheet2")
-                .head(Person.class)
-                .registerWriteHandler(new SpinnerWriteHandler(personDropDown))
-                .build();
-        writer.write(addresses, sheet1).write(people, sheet2);
-        writer.finish();
-    }
-
-    @GetMapping("/easy/read")
-    public List easyexcelR() throws Exception {
-        String path = "E:\\excel\\easyexcel导出.xlsx";
-        File file = new File(path);
-        InputStream is = new FileInputStream(file);
-        final ByteArrayOutputStream os = IoUtil.reuseInputStream(is);
-        AddressListener listener = new AddressListener();
-        //读取单个sheet
-        //读取多个sheet  多次读取单个sheet
-        EasyExcel.read(new ByteArrayInputStream(os.toByteArray()))
-                .head(Address.class) //此处有坑 head的class一定要在ExcelReaderBuilder的head方法设置，不然读不到数据
-                .sheet(0)
-                .registerReadListener(listener)
-                .doRead();
-
-        //03版本读取指定sheet会报此错误，必须又从头读取，操蛋  07版本没问题
-        //com.alibaba.excel.analysis.v03.handlers.LabelSstRecordHandler.processRecord
-        PersonListener personListener = new PersonListener();
-        EasyExcel.read(new ByteArrayInputStream(os.toByteArray()))
-                .head(Person.class)
-                .sheet(1)
-                .registerReadListener(personListener)
-                .doRead();
-
-        final List<Address> addresses = listener.getAddresses();
-        final List<Person> people = personListener.getPeople();
-        return Arrays.asList(addresses, people);
-    }
 
     @GetMapping("/word/export/complex")
     public void complexWord(HttpServletResponse response) throws Exception {

@@ -124,15 +124,6 @@ public class MyDropDownHandler implements DropDownHandler {
 
 ```
 
-##### 1.4 easyexcel使用
-
-[easyexcel官方GitHub地址](https://github.com/alibaba/easyexcel)
-```
-引入了easyexcel依赖，可根据需求选择excel的api,数据量大或需要批量操作excel数据的推荐easyexcel，自己参考官方文档。
-如果需要从配置文件读取表头用此SDK。
-```
-
-
 #### 2.word sdk使用文档
 
 ##### 2.1 word导出
