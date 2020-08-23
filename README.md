@@ -2,9 +2,9 @@
 ```
 使用：项目添加依赖
     <dependency>
-		<groupId>com.kun.sdk</groupId>
-		<artifactId>kun-sdk-office</artifactId>
-		<version>4.0.0</version>
+		<groupId>com.dlw.office</groupId>
+		<artifactId>sdk-office</artifactId>
+		<version>1.0.0</version>
 	</dpendency>
 ```
 #### 1.excel sdk使用文档
