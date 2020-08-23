@@ -1,14 +1,7 @@
-##作者qq邮箱： 983546945@qq.com
+##作者联系方式：qq： 983546945
 
 ### **office sdk 使用说明文档**
-```
-使用：项目添加依赖
-    <dependency>
-		<groupId>com.dlw.office</groupId>
-		<artifactId>sdk-office</artifactId>
-		<version>1.0.0</version>
-	</dpendency>
-```
+
 #### 1.excel sdk使用文档
 
 ##### 1.1 excel模板下载
