@@ -1,0 +1,113 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Java template
+# Compiled class file
+*.class
+.git/
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Intellij Idea Generated Resources #
+.idea/*
+.idea
+*.iml
+
+# Apache Maven Generated Resources #
+*/target/*
+**/target
+
+# OSX System temp file #
+.DS_STORE
+.project
+.settings
+.classpath
+
+# Spring Boot Multiple Environment Alternational Config File
+application.yml
+*rebel.xml
+*.bak
+
+// 排除docker 文件
+docker-compose.yml
+Dockerfile
+application-docker.properties
+application-docker.yml
+build_docker.sh
+
+logback-docker.xml
+
+Dockerfile
+
+﻿# Created by .ignore support plugin (hsz.mobi)
+### Java template
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Intellij Idea Generated Resources #
+.idea/*
+.idea
+*.iml
+
+# Apache Maven Generated Resources #
+*/target/*
+**/target
+
+# OSX System temp file #
+.DS_STORE
+.project
+.settings
+.classpath
+
+# Spring Boot Multiple Environment Alternational Config File
+#application.yml
+*rebel.xml
+*.bak
+
+// 排除docker 文件
+docker-compose.yml
+Dockerfile
+application-docker.properties
+application-docker.yml
+build_docker.sh
+
+logback-docker.xml
+
+//es data
+data/
